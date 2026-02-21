@@ -1,18 +1,25 @@
 # NFL Super Bowl Winner Predictor (SEA vs NE)
 
-This project predicts the Super Bowl winner using NFL play-by-play data (2009–2025).
+Predicts the Super Bowl winner using NFL play-by-play data (2009–2025) with rolling 5-game momentum features and an XGBoost classifier.
 
-## Approach
-- Data source: nflverse via `nfl_data_py`
-- Feature engineering: team-level game stats + rolling 5-game momentum
-- Model: XGBoost classifier
+## Data
+- Source: nflverse via `nfl_data_py`
+- Seasons: 2009–2025
+
+## Feature Engineering
+- Team-level game stats from play-by-play (points, EPA, success rate, turnovers)
+- Rolling 5-game averages (momentum) with leakage prevention (shifted by 1 game)
+- Matchup “difference” features (SEA - NE)
+
+## Modeling
+- XGBoost classifier for win probability
 - Baseline: point differential probability model
-- Final prediction: blended probability
+- Final: blended probability
+
+## Visuals
+![Rolling Points](outputs/Plot_Rolling_momentum.png)
+![Rolling EPA](outputs/plot_EPA_momentum.png)
 
 ## How to Run
-1. Open the notebook:
-   - `SuperBowl_Predictor.ipynb`
-2. Run cells top to bottom.
-
-## Outputs
-Saved plots are available in `/outputs`.
+```bash
+pip install -r requirements.txt
